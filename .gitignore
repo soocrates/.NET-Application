@@ -1,0 +1,67 @@
+# Ignore build output directories
+bin/
+obj/
+
+# Ignore Visual Studio files
+.vscode/
+.vs/
+.idea/
+
+# Ignore user-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Ignore NuGet packages and restore directories
+packages/
+*.nupkg
+*.snupkg
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# Ignore Rider and ReSharper specific files
+.idea/
+*.sln.iml
+*.DotSettings.user
+_ReSharper*/
+**/JetBrains.ReSharper.SDK/
+
+# Ignore logs and crash dumps
+*.log
+*.tlg
+*.dmp
+
+# Ignore temporary files
+*.tmp
+*.temp
+
+# Ignore publish output
+publish/
+out/
+
+# Ignore test results
+TestResults/
+*.trx
+*.coverage
+
+# Ignore dotnet specific files
+.lock.json
+*.lock.json
+*.template.config/
+*.vsix
+*.swagger
+
+# Ignore any local databases
+*.mdf
+*.ldf
+
+# Ignore config files with sensitive data (e.g., connection strings)
+appsettings.Development.json
+appsettings.Local.json
+appsettings.Production.json
+
+# Ignore other OS generated files
+.DS_Store
+Thumbs.db
