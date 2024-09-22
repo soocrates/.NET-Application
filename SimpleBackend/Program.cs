@@ -42,7 +42,12 @@ builder.Services.AddControllers().AddJsonOptions(x =>
     x.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve;
     x.JsonSerializerOptions.WriteIndented = true;
 });
-builder.Services.AddSwaggerGen();
+
+// Add Swagger service but only use it in development
+if (builder.Environment.IsDevelopment())
+{
+    builder.Services.AddSwaggerGen();
+}
 
 var app = builder.Build();
 
@@ -67,6 +72,7 @@ app.Use(async (context, next) =>
     AWSXRayRecorder.Instance.AddAnnotation("ResponseCode", statusCode.ToString());
 });
 
+// Enable Swagger only in development environment
 if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
