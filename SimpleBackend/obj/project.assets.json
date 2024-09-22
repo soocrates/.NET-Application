@@ -2,6 +2,170 @@
   "version": 3,
   "targets": {
     "net8.0": {
+      "Amazon.Lambda.SQSEvents/2.1.0": {
+        "type": "package",
+        "compile": {
+          "lib/netcoreapp3.1/Amazon.Lambda.SQSEvents.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netcoreapp3.1/Amazon.Lambda.SQSEvents.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "AWS.Logger.AspNetCore/3.5.3": {
+        "type": "package",
+        "dependencies": {
+          "AWS.Logger.Core": "3.3.3",
+          "Microsoft.Extensions.Configuration": "2.1.0",
+          "Microsoft.Extensions.DependencyInjection": "2.1.0",
+          "Microsoft.Extensions.Logging": "2.1.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/AWS.Logger.AspNetCore.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/AWS.Logger.AspNetCore.dll": {
+            "related": ".pdb;.xml"
+          }
+        }
+      },
+      "AWS.Logger.Core/3.3.3": {
+        "type": "package",
+        "dependencies": {
+          "AWSSDK.CloudWatchLogs": "3.7.305.15"
+        },
+        "compile": {
+          "lib/netstandard2.0/AWS.Logger.Core.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/AWS.Logger.Core.dll": {
+            "related": ".pdb;.xml"
+          }
+        }
+      },
+      "AWSSDK.CloudWatchLogs/3.7.403.8": {
+        "type": "package",
+        "dependencies": {
+          "AWSSDK.Core": "[3.7.400.22, 4.0.0)"
+        },
+        "compile": {
+          "lib/net8.0/AWSSDK.CloudWatchLogs.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/AWSSDK.CloudWatchLogs.dll": {
+            "related": ".pdb;.xml"
+          }
+        }
+      },
+      "AWSSDK.Core/3.7.400.22": {
+        "type": "package",
+        "compile": {
+          "lib/net8.0/AWSSDK.Core.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/AWSSDK.Core.dll": {
+            "related": ".pdb;.xml"
+          }
+        }
+      },
+      "AWSSDK.Extensions.NETCore.Setup/3.7.301": {
+        "type": "package",
+        "dependencies": {
+          "AWSSDK.Core": "3.7.300",
+          "Microsoft.Extensions.Configuration.Abstractions": "2.0.0",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "2.0.0",
+          "Microsoft.Extensions.Logging.Abstractions": "2.0.0"
+        },
+        "compile": {
+          "lib/net8.0/AWSSDK.Extensions.NETCore.Setup.dll": {
+            "related": ".pdb"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/AWSSDK.Extensions.NETCore.Setup.dll": {
+            "related": ".pdb"
+          }
+        }
+      },
+      "AWSSDK.XRay/3.7.400.22": {
+        "type": "package",
+        "dependencies": {
+          "AWSSDK.Core": "[3.7.400.22, 4.0.0)"
+        },
+        "compile": {
+          "lib/net8.0/AWSSDK.XRay.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/AWSSDK.XRay.dll": {
+            "related": ".pdb;.xml"
+          }
+        }
+      },
+      "AWSXRayRecorder.Core/2.15.0": {
+        "type": "package",
+        "dependencies": {
+          "AWSSDK.Core": "3.3.25.1",
+          "Amazon.Lambda.SQSEvents": "2.1.0"
+        },
+        "compile": {
+          "lib/net6.0/AWSXRayRecorder.Core.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/AWSXRayRecorder.Core.dll": {
+            "related": ".xml"
+          }
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
+      },
+      "AWSXRayRecorder.Handlers.AspNetCore/2.12.0": {
+        "type": "package",
+        "dependencies": {
+          "AWSXRayRecorder.Core": "2.15.0"
+        },
+        "compile": {
+          "lib/net6.0/AWSXRayRecorder.Handlers.AspNetCore.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/AWSXRayRecorder.Handlers.AspNetCore.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "AWSXRayRecorder.Handlers.AwsSdk/2.13.0": {
+        "type": "package",
+        "dependencies": {
+          "AWSXRayRecorder.Core": "2.15.0"
+        },
+        "compile": {
+          "lib/net6.0/AWSXRayRecorder.Handlers.AwsSdk.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/AWSXRayRecorder.Handlers.AwsSdk.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "Azure.Core/1.35.0": {
         "type": "package",
         "dependencies": {
@@ -588,19 +752,18 @@
           "buildTransitive/net6.0/_._": {}
         }
       },
-      "Microsoft.Extensions.Configuration/1.1.2": {
+      "Microsoft.Extensions.Configuration/2.1.0": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Extensions.Configuration.Abstractions": "1.1.2",
-          "NETStandard.Library": "1.6.1"
+          "Microsoft.Extensions.Configuration.Abstractions": "2.1.0"
         },
         "compile": {
-          "lib/netstandard1.1/Microsoft.Extensions.Configuration.dll": {
+          "lib/netstandard2.0/Microsoft.Extensions.Configuration.dll": {
             "related": ".xml"
           }
         },
         "runtime": {
-          "lib/netstandard1.1/Microsoft.Extensions.Configuration.dll": {
+          "lib/netstandard2.0/Microsoft.Extensions.Configuration.dll": {
             "related": ".xml"
           }
         }
@@ -2936,6 +3099,226 @@
     }
   },
   "libraries": {
+    "Amazon.Lambda.SQSEvents/2.1.0": {
+      "sha512": "a1xaCIuXDleJ8iRE3vHWWhtPqUiURmoQUS68INMEQmtfHr4wTz837TQZONo4cyubv5sZj78DDrYessZEzgFRGQ==",
+      "type": "package",
+      "path": "amazon.lambda.sqsevents/2.1.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "amazon.lambda.sqsevents.2.1.0.nupkg.sha512",
+        "amazon.lambda.sqsevents.nuspec",
+        "lib/netcoreapp3.1/Amazon.Lambda.SQSEvents.dll",
+        "lib/netcoreapp3.1/Amazon.Lambda.SQSEvents.xml",
+        "lib/netstandard2.0/Amazon.Lambda.SQSEvents.dll",
+        "lib/netstandard2.0/Amazon.Lambda.SQSEvents.xml"
+      ]
+    },
+    "AWS.Logger.AspNetCore/3.5.3": {
+      "sha512": "rCMUHIdehxqcqUcwTNPpg298itn/ZRJrzyBffq6InRom1x5Hf2zw3kIK5SRx0B+Ve5kMGGRf1mYoWbQIHHcwvg==",
+      "type": "package",
+      "path": "aws.logger.aspnetcore/3.5.3",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE",
+        "README.md",
+        "aws.logger.aspnetcore.3.5.3.nupkg.sha512",
+        "aws.logger.aspnetcore.nuspec",
+        "icon.png",
+        "lib/netstandard2.0/AWS.Logger.AspNetCore.dll",
+        "lib/netstandard2.0/AWS.Logger.AspNetCore.pdb",
+        "lib/netstandard2.0/AWS.Logger.AspNetCore.xml"
+      ]
+    },
+    "AWS.Logger.Core/3.3.3": {
+      "sha512": "JEXjiwIwAws5YJZDVwSqUoZIjMxsAuaZOQFZfLk6lYTg9NLrFY1dHafy6qifz/8ZQSlBiuSs+MAAHlBqHF9Cfw==",
+      "type": "package",
+      "path": "aws.logger.core/3.3.3",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE",
+        "README.md",
+        "aws.logger.core.3.3.3.nupkg.sha512",
+        "aws.logger.core.nuspec",
+        "icon.png",
+        "lib/net45/AWS.Logger.Core.dll",
+        "lib/net45/AWS.Logger.Core.pdb",
+        "lib/net45/AWS.Logger.Core.xml",
+        "lib/netstandard2.0/AWS.Logger.Core.dll",
+        "lib/netstandard2.0/AWS.Logger.Core.pdb",
+        "lib/netstandard2.0/AWS.Logger.Core.xml"
+      ]
+    },
+    "AWSSDK.CloudWatchLogs/3.7.403.8": {
+      "sha512": "TIgM+y3dYPjAIqJC7OtyThAv3IBOc2RaNKv175nYLR5fk3I5wPHpJGMqNwJLFXJdfgTwsqy8lM0qkoAQIOERvw==",
+      "type": "package",
+      "path": "awssdk.cloudwatchlogs/3.7.403.8",
+      "hasTools": true,
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "analyzers/dotnet/cs/AWSSDK.CloudWatchLogs.CodeAnalysis.dll",
+        "analyzers/dotnet/cs/SharedAnalysisCode.dll",
+        "awssdk.cloudwatchlogs.3.7.403.8.nupkg.sha512",
+        "awssdk.cloudwatchlogs.nuspec",
+        "images/AWSLogo.png",
+        "lib/net35/AWSSDK.CloudWatchLogs.dll",
+        "lib/net35/AWSSDK.CloudWatchLogs.pdb",
+        "lib/net35/AWSSDK.CloudWatchLogs.xml",
+        "lib/net45/AWSSDK.CloudWatchLogs.dll",
+        "lib/net45/AWSSDK.CloudWatchLogs.pdb",
+        "lib/net45/AWSSDK.CloudWatchLogs.xml",
+        "lib/net8.0/AWSSDK.CloudWatchLogs.dll",
+        "lib/net8.0/AWSSDK.CloudWatchLogs.pdb",
+        "lib/net8.0/AWSSDK.CloudWatchLogs.xml",
+        "lib/netcoreapp3.1/AWSSDK.CloudWatchLogs.dll",
+        "lib/netcoreapp3.1/AWSSDK.CloudWatchLogs.pdb",
+        "lib/netcoreapp3.1/AWSSDK.CloudWatchLogs.xml",
+        "lib/netstandard2.0/AWSSDK.CloudWatchLogs.dll",
+        "lib/netstandard2.0/AWSSDK.CloudWatchLogs.pdb",
+        "lib/netstandard2.0/AWSSDK.CloudWatchLogs.xml",
+        "tools/install.ps1",
+        "tools/uninstall.ps1"
+      ]
+    },
+    "AWSSDK.Core/3.7.400.22": {
+      "sha512": "v1Pm6lFSkAufm7WtiwE+2laHSj330cVUzTRTXZ50YXNgT0jDu1OryJrTqxPxlbiv6jFEkTutvM9rImuvDSpaeg==",
+      "type": "package",
+      "path": "awssdk.core/3.7.400.22",
+      "hasTools": true,
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "awssdk.core.3.7.400.22.nupkg.sha512",
+        "awssdk.core.nuspec",
+        "images/AWSLogo.png",
+        "lib/net35/AWSSDK.Core.dll",
+        "lib/net35/AWSSDK.Core.pdb",
+        "lib/net35/AWSSDK.Core.xml",
+        "lib/net45/AWSSDK.Core.dll",
+        "lib/net45/AWSSDK.Core.pdb",
+        "lib/net45/AWSSDK.Core.xml",
+        "lib/net8.0/AWSSDK.Core.dll",
+        "lib/net8.0/AWSSDK.Core.pdb",
+        "lib/net8.0/AWSSDK.Core.xml",
+        "lib/netcoreapp3.1/AWSSDK.Core.dll",
+        "lib/netcoreapp3.1/AWSSDK.Core.pdb",
+        "lib/netcoreapp3.1/AWSSDK.Core.xml",
+        "lib/netstandard2.0/AWSSDK.Core.dll",
+        "lib/netstandard2.0/AWSSDK.Core.pdb",
+        "lib/netstandard2.0/AWSSDK.Core.xml",
+        "tools/account-management.ps1"
+      ]
+    },
+    "AWSSDK.Extensions.NETCore.Setup/3.7.301": {
+      "sha512": "hXejqa+G72kVCSmpKlNVWDEqa8KVWOFL/asgoE2mairQOnmTCv6vMxaXjJ0nQaad5/21zTdKDIfDiki5YTne1Q==",
+      "type": "package",
+      "path": "awssdk.extensions.netcore.setup/3.7.301",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "awssdk.extensions.netcore.setup.3.7.301.nupkg.sha512",
+        "awssdk.extensions.netcore.setup.nuspec",
+        "images/AWSLogo.png",
+        "lib/net8.0/AWSSDK.Extensions.NETCore.Setup.dll",
+        "lib/net8.0/AWSSDK.Extensions.NETCore.Setup.pdb",
+        "lib/netcoreapp3.1/AWSSDK.Extensions.NETCore.Setup.dll",
+        "lib/netcoreapp3.1/AWSSDK.Extensions.NETCore.Setup.pdb",
+        "lib/netstandard2.0/AWSSDK.Extensions.NETCore.Setup.dll",
+        "lib/netstandard2.0/AWSSDK.Extensions.NETCore.Setup.pdb"
+      ]
+    },
+    "AWSSDK.XRay/3.7.400.22": {
+      "sha512": "/SQ0HZYkgdo1rhhuX/pZ6MdWl+TAgn/bMVxbd3xFtD6V/XP3HQM5tzvy9qPLXBp6S8jD+BVqnLIl9P7N4YPanA==",
+      "type": "package",
+      "path": "awssdk.xray/3.7.400.22",
+      "hasTools": true,
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "analyzers/dotnet/cs/AWSSDK.XRay.CodeAnalysis.dll",
+        "analyzers/dotnet/cs/SharedAnalysisCode.dll",
+        "awssdk.xray.3.7.400.22.nupkg.sha512",
+        "awssdk.xray.nuspec",
+        "images/AWSLogo.png",
+        "lib/net35/AWSSDK.XRay.dll",
+        "lib/net35/AWSSDK.XRay.pdb",
+        "lib/net35/AWSSDK.XRay.xml",
+        "lib/net45/AWSSDK.XRay.dll",
+        "lib/net45/AWSSDK.XRay.pdb",
+        "lib/net45/AWSSDK.XRay.xml",
+        "lib/net8.0/AWSSDK.XRay.dll",
+        "lib/net8.0/AWSSDK.XRay.pdb",
+        "lib/net8.0/AWSSDK.XRay.xml",
+        "lib/netcoreapp3.1/AWSSDK.XRay.dll",
+        "lib/netcoreapp3.1/AWSSDK.XRay.pdb",
+        "lib/netcoreapp3.1/AWSSDK.XRay.xml",
+        "lib/netstandard2.0/AWSSDK.XRay.dll",
+        "lib/netstandard2.0/AWSSDK.XRay.pdb",
+        "lib/netstandard2.0/AWSSDK.XRay.xml",
+        "tools/install.ps1",
+        "tools/uninstall.ps1"
+      ]
+    },
+    "AWSXRayRecorder.Core/2.15.0": {
+      "sha512": "umkJQW57XjLMHnLIOzTAGVHehiPVqAguMnrH45m/ndcOIrOkoUThYf8P1+Iv6Ckb18pmWXSUoF7PqgKmTXkejQ==",
+      "type": "package",
+      "path": "awsxrayrecorder.core/2.15.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "awsxrayrecorder.core.2.15.0.nupkg.sha512",
+        "awsxrayrecorder.core.nuspec",
+        "lib/net45/AWSXRayRecorder.Core.dll",
+        "lib/net45/AWSXRayRecorder.Core.xml",
+        "lib/net462/AWSXRayRecorder.Core.dll",
+        "lib/net462/AWSXRayRecorder.Core.xml",
+        "lib/net6.0/AWSXRayRecorder.Core.dll",
+        "lib/net6.0/AWSXRayRecorder.Core.xml",
+        "lib/netcoreapp3.1/AWSXRayRecorder.Core.dll",
+        "lib/netcoreapp3.1/AWSXRayRecorder.Core.xml",
+        "lib/netstandard2.0/AWSXRayRecorder.Core.dll",
+        "lib/netstandard2.0/AWSXRayRecorder.Core.xml"
+      ]
+    },
+    "AWSXRayRecorder.Handlers.AspNetCore/2.12.0": {
+      "sha512": "Ex2zM4NPof+XXj9SkwLX0dbkzSrqjOMzog33x+FSEWM47EOunLDFZ3P8iJD6UYf8D8370Bq0i7p6AnrPot4eBQ==",
+      "type": "package",
+      "path": "awsxrayrecorder.handlers.aspnetcore/2.12.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "awsxrayrecorder.handlers.aspnetcore.2.12.0.nupkg.sha512",
+        "awsxrayrecorder.handlers.aspnetcore.nuspec",
+        "lib/net6.0/AWSXRayRecorder.Handlers.AspNetCore.dll",
+        "lib/net6.0/AWSXRayRecorder.Handlers.AspNetCore.xml",
+        "lib/netcoreapp3.1/AWSXRayRecorder.Handlers.AspNetCore.dll",
+        "lib/netcoreapp3.1/AWSXRayRecorder.Handlers.AspNetCore.xml",
+        "lib/netstandard2.0/AWSXRayRecorder.Handlers.AspNetCore.dll",
+        "lib/netstandard2.0/AWSXRayRecorder.Handlers.AspNetCore.xml"
+      ]
+    },
+    "AWSXRayRecorder.Handlers.AwsSdk/2.13.0": {
+      "sha512": "R6w1bZOa6Ri/1FB+0bYvRLQbTMq2pj9dpM9zsi283y/7jyfdEnU5QVJVBx2eR27lo3poQKXGuUx5thP5aUmNvQ==",
+      "type": "package",
+      "path": "awsxrayrecorder.handlers.awssdk/2.13.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "awsxrayrecorder.handlers.awssdk.2.13.0.nupkg.sha512",
+        "awsxrayrecorder.handlers.awssdk.nuspec",
+        "lib/net45/AWSXRayRecorder.Handlers.AwsSdk.dll",
+        "lib/net45/AWSXRayRecorder.Handlers.AwsSdk.xml",
+        "lib/net462/AWSXRayRecorder.Handlers.AwsSdk.dll",
+        "lib/net462/AWSXRayRecorder.Handlers.AwsSdk.xml",
+        "lib/net6.0/AWSXRayRecorder.Handlers.AwsSdk.dll",
+        "lib/net6.0/AWSXRayRecorder.Handlers.AwsSdk.xml",
+        "lib/netstandard2.0/AWSXRayRecorder.Handlers.AwsSdk.dll",
+        "lib/netstandard2.0/AWSXRayRecorder.Handlers.AwsSdk.xml"
+      ]
+    },
     "Azure.Core/1.35.0": {
       "sha512": "hENcx03Jyuqv05F4RBEPbxz29UrM3Nbhnr6Wl6NQpoU9BCIbL3XLentrxDCTrH54NLS11Exxi/o8MYgT/cnKFA==",
       "type": "package",
@@ -4031,16 +4414,16 @@
         "useSharedDesignerContext.txt"
       ]
     },
-    "Microsoft.Extensions.Configuration/1.1.2": {
-      "sha512": "eK5BHx/pHLGGO/WDo7CS070MGgx3N7B/ORO/oKeS0qgCyv+ZAR47YWKXmG5aF+lIrAJd3uJjMTdTKgXTU2UDWw==",
+    "Microsoft.Extensions.Configuration/2.1.0": {
+      "sha512": "SS8ce1GYQTkZoOq5bskqQ+m7xiXQjnKRiGfVNZkkX2SX0HpXNRsKnSUaywRRuCje3v2KT9xeacsM3J9/G2exsQ==",
       "type": "package",
-      "path": "microsoft.extensions.configuration/1.1.2",
+      "path": "microsoft.extensions.configuration/2.1.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "lib/netstandard1.1/Microsoft.Extensions.Configuration.dll",
-        "lib/netstandard1.1/Microsoft.Extensions.Configuration.xml",
-        "microsoft.extensions.configuration.1.1.2.nupkg.sha512",
+        "lib/netstandard2.0/Microsoft.Extensions.Configuration.dll",
+        "lib/netstandard2.0/Microsoft.Extensions.Configuration.xml",
+        "microsoft.extensions.configuration.2.1.0.nupkg.sha512",
         "microsoft.extensions.configuration.nuspec"
       ]
     },
@@ -9106,6 +9489,13 @@
   },
   "projectFileDependencyGroups": {
     "net8.0": [
+      "AWS.Logger.AspNetCore >= 3.5.3",
+      "AWSSDK.CloudWatchLogs >= 3.7.403.8",
+      "AWSSDK.Extensions.NETCore.Setup >= 3.7.301",
+      "AWSSDK.XRay >= 3.7.400.22",
+      "AWSXRayRecorder.Core >= 2.15.0",
+      "AWSXRayRecorder.Handlers.AspNetCore >= 2.12.0",
+      "AWSXRayRecorder.Handlers.AwsSdk >= 2.13.0",
       "DotNetEnv >= 3.1.1",
       "Microsoft.AspNetCore.OpenApi >= 8.0.8",
       "Microsoft.EntityFrameworkCore.SqlServer >= 8.0.8",
@@ -9156,6 +9546,34 @@
       "net8.0": {
         "targetAlias": "net8.0",
         "dependencies": {
+          "AWS.Logger.AspNetCore": {
+            "target": "Package",
+            "version": "[3.5.3, )"
+          },
+          "AWSSDK.CloudWatchLogs": {
+            "target": "Package",
+            "version": "[3.7.403.8, )"
+          },
+          "AWSSDK.Extensions.NETCore.Setup": {
+            "target": "Package",
+            "version": "[3.7.301, )"
+          },
+          "AWSSDK.XRay": {
+            "target": "Package",
+            "version": "[3.7.400.22, )"
+          },
+          "AWSXRayRecorder.Core": {
+            "target": "Package",
+            "version": "[2.15.0, )"
+          },
+          "AWSXRayRecorder.Handlers.AspNetCore": {
+            "target": "Package",
+            "version": "[2.12.0, )"
+          },
+          "AWSXRayRecorder.Handlers.AwsSdk": {
+            "target": "Package",
+            "version": "[2.13.0, )"
+          },
           "DotNetEnv": {
             "target": "Package",
             "version": "[3.1.1, )"

@@ -8,6 +8,13 @@
     ".NETCoreApp,Version=v8.0": {
       "SimpleBackend/1.0.0": {
         "dependencies": {
+          "AWS.Logger.AspNetCore": "3.5.3",
+          "AWSSDK.CloudWatchLogs": "3.7.403.8",
+          "AWSSDK.Extensions.NETCore.Setup": "3.7.301",
+          "AWSSDK.XRay": "3.7.400.22",
+          "AWSXRayRecorder.Core": "2.15.0",
+          "AWSXRayRecorder.Handlers.AspNetCore": "2.12.0",
+          "AWSXRayRecorder.Handlers.AwsSdk": "2.13.0",
           "DotNetEnv": "3.1.1",
           "Microsoft.AspNetCore.OpenApi": "8.0.8",
           "Microsoft.EntityFrameworkCore.SqlServer": "8.0.8",
@@ -17,6 +24,117 @@
         },
         "runtime": {
           "SimpleBackend.dll": {}
+        }
+      },
+      "Amazon.Lambda.SQSEvents/2.1.0": {
+        "runtime": {
+          "lib/netcoreapp3.1/Amazon.Lambda.SQSEvents.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "AWS.Logger.AspNetCore/3.5.3": {
+        "dependencies": {
+          "AWS.Logger.Core": "3.3.3",
+          "Microsoft.Extensions.Configuration": "2.1.0",
+          "Microsoft.Extensions.DependencyInjection": "8.0.0",
+          "Microsoft.Extensions.Logging": "8.0.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/AWS.Logger.AspNetCore.dll": {
+            "assemblyVersion": "3.5.3.0",
+            "fileVersion": "3.5.3.0"
+          }
+        }
+      },
+      "AWS.Logger.Core/3.3.3": {
+        "dependencies": {
+          "AWSSDK.CloudWatchLogs": "3.7.403.8"
+        },
+        "runtime": {
+          "lib/netstandard2.0/AWS.Logger.Core.dll": {
+            "assemblyVersion": "3.3.3.0",
+            "fileVersion": "3.3.3.0"
+          }
+        }
+      },
+      "AWSSDK.CloudWatchLogs/3.7.403.8": {
+        "dependencies": {
+          "AWSSDK.Core": "3.7.400.22"
+        },
+        "runtime": {
+          "lib/net8.0/AWSSDK.CloudWatchLogs.dll": {
+            "assemblyVersion": "3.3.0.0",
+            "fileVersion": "3.7.403.8"
+          }
+        }
+      },
+      "AWSSDK.Core/3.7.400.22": {
+        "runtime": {
+          "lib/net8.0/AWSSDK.Core.dll": {
+            "assemblyVersion": "3.3.0.0",
+            "fileVersion": "3.7.400.22"
+          }
+        }
+      },
+      "AWSSDK.Extensions.NETCore.Setup/3.7.301": {
+        "dependencies": {
+          "AWSSDK.Core": "3.7.400.22",
+          "Microsoft.Extensions.Configuration.Abstractions": "8.0.0",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "8.0.0",
+          "Microsoft.Extensions.Logging.Abstractions": "8.0.0"
+        },
+        "runtime": {
+          "lib/net8.0/AWSSDK.Extensions.NETCore.Setup.dll": {
+            "assemblyVersion": "3.3.0.0",
+            "fileVersion": "3.7.7.0"
+          }
+        }
+      },
+      "AWSSDK.XRay/3.7.400.22": {
+        "dependencies": {
+          "AWSSDK.Core": "3.7.400.22"
+        },
+        "runtime": {
+          "lib/net8.0/AWSSDK.XRay.dll": {
+            "assemblyVersion": "3.3.0.0",
+            "fileVersion": "3.7.400.22"
+          }
+        }
+      },
+      "AWSXRayRecorder.Core/2.15.0": {
+        "dependencies": {
+          "AWSSDK.Core": "3.7.400.22",
+          "Amazon.Lambda.SQSEvents": "2.1.0"
+        },
+        "runtime": {
+          "lib/net6.0/AWSXRayRecorder.Core.dll": {
+            "assemblyVersion": "2.15.0.0",
+            "fileVersion": "2.15.0.0"
+          }
+        }
+      },
+      "AWSXRayRecorder.Handlers.AspNetCore/2.12.0": {
+        "dependencies": {
+          "AWSXRayRecorder.Core": "2.15.0"
+        },
+        "runtime": {
+          "lib/net6.0/AWSXRayRecorder.Handlers.AspNetCore.dll": {
+            "assemblyVersion": "2.12.0.0",
+            "fileVersion": "2.12.0.0"
+          }
+        }
+      },
+      "AWSXRayRecorder.Handlers.AwsSdk/2.13.0": {
+        "dependencies": {
+          "AWSXRayRecorder.Core": "2.15.0"
+        },
+        "runtime": {
+          "lib/net6.0/AWSXRayRecorder.Handlers.AwsSdk.dll": {
+            "assemblyVersion": "2.13.0.0",
+            "fileVersion": "2.13.0.0"
+          }
         }
       },
       "Azure.Core/1.35.0": {
@@ -55,7 +173,7 @@
       },
       "DotNetEnv/3.1.1": {
         "dependencies": {
-          "Microsoft.Extensions.Configuration": "1.1.2",
+          "Microsoft.Extensions.Configuration": "2.1.0",
           "Microsoft.Extensions.Configuration.Abstractions": "8.0.0",
           "NETStandard.Library": "1.6.1",
           "Sprache": "2.3.1",
@@ -461,10 +579,9 @@
           "Microsoft.Extensions.Primitives": "8.0.0"
         }
       },
-      "Microsoft.Extensions.Configuration/1.1.2": {
+      "Microsoft.Extensions.Configuration/2.1.0": {
         "dependencies": {
-          "Microsoft.Extensions.Configuration.Abstractions": "8.0.0",
-          "NETStandard.Library": "1.6.1"
+          "Microsoft.Extensions.Configuration.Abstractions": "8.0.0"
         }
       },
       "Microsoft.Extensions.Configuration.Abstractions/8.0.0": {
@@ -1656,6 +1773,76 @@
       "serviceable": false,
       "sha512": ""
     },
+    "Amazon.Lambda.SQSEvents/2.1.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-a1xaCIuXDleJ8iRE3vHWWhtPqUiURmoQUS68INMEQmtfHr4wTz837TQZONo4cyubv5sZj78DDrYessZEzgFRGQ==",
+      "path": "amazon.lambda.sqsevents/2.1.0",
+      "hashPath": "amazon.lambda.sqsevents.2.1.0.nupkg.sha512"
+    },
+    "AWS.Logger.AspNetCore/3.5.3": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-rCMUHIdehxqcqUcwTNPpg298itn/ZRJrzyBffq6InRom1x5Hf2zw3kIK5SRx0B+Ve5kMGGRf1mYoWbQIHHcwvg==",
+      "path": "aws.logger.aspnetcore/3.5.3",
+      "hashPath": "aws.logger.aspnetcore.3.5.3.nupkg.sha512"
+    },
+    "AWS.Logger.Core/3.3.3": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-JEXjiwIwAws5YJZDVwSqUoZIjMxsAuaZOQFZfLk6lYTg9NLrFY1dHafy6qifz/8ZQSlBiuSs+MAAHlBqHF9Cfw==",
+      "path": "aws.logger.core/3.3.3",
+      "hashPath": "aws.logger.core.3.3.3.nupkg.sha512"
+    },
+    "AWSSDK.CloudWatchLogs/3.7.403.8": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-TIgM+y3dYPjAIqJC7OtyThAv3IBOc2RaNKv175nYLR5fk3I5wPHpJGMqNwJLFXJdfgTwsqy8lM0qkoAQIOERvw==",
+      "path": "awssdk.cloudwatchlogs/3.7.403.8",
+      "hashPath": "awssdk.cloudwatchlogs.3.7.403.8.nupkg.sha512"
+    },
+    "AWSSDK.Core/3.7.400.22": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-v1Pm6lFSkAufm7WtiwE+2laHSj330cVUzTRTXZ50YXNgT0jDu1OryJrTqxPxlbiv6jFEkTutvM9rImuvDSpaeg==",
+      "path": "awssdk.core/3.7.400.22",
+      "hashPath": "awssdk.core.3.7.400.22.nupkg.sha512"
+    },
+    "AWSSDK.Extensions.NETCore.Setup/3.7.301": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-hXejqa+G72kVCSmpKlNVWDEqa8KVWOFL/asgoE2mairQOnmTCv6vMxaXjJ0nQaad5/21zTdKDIfDiki5YTne1Q==",
+      "path": "awssdk.extensions.netcore.setup/3.7.301",
+      "hashPath": "awssdk.extensions.netcore.setup.3.7.301.nupkg.sha512"
+    },
+    "AWSSDK.XRay/3.7.400.22": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-/SQ0HZYkgdo1rhhuX/pZ6MdWl+TAgn/bMVxbd3xFtD6V/XP3HQM5tzvy9qPLXBp6S8jD+BVqnLIl9P7N4YPanA==",
+      "path": "awssdk.xray/3.7.400.22",
+      "hashPath": "awssdk.xray.3.7.400.22.nupkg.sha512"
+    },
+    "AWSXRayRecorder.Core/2.15.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-umkJQW57XjLMHnLIOzTAGVHehiPVqAguMnrH45m/ndcOIrOkoUThYf8P1+Iv6Ckb18pmWXSUoF7PqgKmTXkejQ==",
+      "path": "awsxrayrecorder.core/2.15.0",
+      "hashPath": "awsxrayrecorder.core.2.15.0.nupkg.sha512"
+    },
+    "AWSXRayRecorder.Handlers.AspNetCore/2.12.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Ex2zM4NPof+XXj9SkwLX0dbkzSrqjOMzog33x+FSEWM47EOunLDFZ3P8iJD6UYf8D8370Bq0i7p6AnrPot4eBQ==",
+      "path": "awsxrayrecorder.handlers.aspnetcore/2.12.0",
+      "hashPath": "awsxrayrecorder.handlers.aspnetcore.2.12.0.nupkg.sha512"
+    },
+    "AWSXRayRecorder.Handlers.AwsSdk/2.13.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-R6w1bZOa6Ri/1FB+0bYvRLQbTMq2pj9dpM9zsi283y/7jyfdEnU5QVJVBx2eR27lo3poQKXGuUx5thP5aUmNvQ==",
+      "path": "awsxrayrecorder.handlers.awssdk/2.13.0",
+      "hashPath": "awsxrayrecorder.handlers.awssdk.2.13.0.nupkg.sha512"
+    },
     "Azure.Core/1.35.0": {
       "type": "package",
       "serviceable": true,
@@ -1824,12 +2011,12 @@
       "path": "microsoft.extensions.caching.memory/8.0.0",
       "hashPath": "microsoft.extensions.caching.memory.8.0.0.nupkg.sha512"
     },
-    "Microsoft.Extensions.Configuration/1.1.2": {
+    "Microsoft.Extensions.Configuration/2.1.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-eK5BHx/pHLGGO/WDo7CS070MGgx3N7B/ORO/oKeS0qgCyv+ZAR47YWKXmG5aF+lIrAJd3uJjMTdTKgXTU2UDWw==",
-      "path": "microsoft.extensions.configuration/1.1.2",
-      "hashPath": "microsoft.extensions.configuration.1.1.2.nupkg.sha512"
+      "sha512": "sha512-SS8ce1GYQTkZoOq5bskqQ+m7xiXQjnKRiGfVNZkkX2SX0HpXNRsKnSUaywRRuCje3v2KT9xeacsM3J9/G2exsQ==",
+      "path": "microsoft.extensions.configuration/2.1.0",
+      "hashPath": "microsoft.extensions.configuration.2.1.0.nupkg.sha512"
     },
     "Microsoft.Extensions.Configuration.Abstractions/8.0.0": {
       "type": "package",
