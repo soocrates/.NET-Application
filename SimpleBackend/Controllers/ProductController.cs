@@ -4,6 +4,7 @@ using SimpleBackend.Data;
 using SimpleBackend.Models;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace SimpleBackend.Controllers
 {
@@ -18,64 +19,50 @@ namespace SimpleBackend.Controllers
             _context = context;
         }
 
-        // Get all products
+        // Get all products with category names
         [HttpGet]
         public async Task<IActionResult> GetProducts()
         {
-            return Ok(await _context.Products.Include(p => p.Category).ToListAsync());
+            var products = await _context.Products
+                .Include(p => p.Category)  // Include the related category
+                .Select(p => new ProductDTO
+                {
+                    ProductId = p.ProductId,
+                    Name = p.Name,
+                    Price = p.Price,
+                    ImageUrl = p.ImageUrl,
+                    Description = p.Description,
+                    CategoryName = p.Category.Name  // Get the category name instead of CategoryId
+                })
+                .ToListAsync();
+
+            return Ok(products);
         }
 
-        // Get a single product by ID
+        // Get a single product by ID with category name
         [HttpGet("{id}")]
         public async Task<IActionResult> GetProduct(int id)
         {
-            var product = await _context.Products.Include(p => p.Category).FirstOrDefaultAsync(p => p.ProductId == id);
-            if (product == null) return NotFound();
-            return Ok(product);
-        }
-
-        // Create a new product
-        [HttpPost]
-        public async Task<IActionResult> CreateProduct(Product product)
-        {
-            _context.Products.Add(product);
-            await _context.SaveChangesAsync();
-            return CreatedAtAction(nameof(GetProduct), new { id = product.ProductId }, product);
-        }
-
-        // Update an existing product
-        [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateProduct(int id, Product product)
-        {
-            if (id != product.ProductId) return BadRequest();
-
-            _context.Entry(product).State = EntityState.Modified;
-            await _context.SaveChangesAsync();
-            return NoContent();
-        }
-
-        // Delete a product
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteProduct(int id)
-        {
-            var product = await _context.Products.FindAsync(id);
-            if (product == null) return NotFound();
-
-            _context.Products.Remove(product);
-            await _context.SaveChangesAsync();
-            return NoContent();
-        }
-
-        // Get categories by product name
-        [HttpGet("name/{productName}/category")]
-        public async Task<IActionResult> GetCategoryByProductName(string productName)
-        {
             var product = await _context.Products
                 .Include(p => p.Category)
-                .FirstOrDefaultAsync(p => p.Name == productName);
+                .Where(p => p.ProductId == id)
+                .Select(p => new ProductDTO
+                {
+                    ProductId = p.ProductId,
+                    Name = p.Name,
+                    Price = p.Price,
+                    ImageUrl = p.ImageUrl,
+                    Description = p.Description,
+                    CategoryName = p.Category.Name
+                })
+                .FirstOrDefaultAsync();
 
-            if (product == null) return NotFound();
-            return Ok(product.Category);
+            if (product == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(product);
         }
     }
 }

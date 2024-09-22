@@ -143,3 +143,4 @@ C:\Users\Administrator\Desktop\DOTNET\SimpleBackend\obj\Debug\net8.0\refint\Simp
 C:\Users\Administrator\Desktop\DOTNET\SimpleBackend\obj\Debug\net8.0\SimpleBackend.pdb
 C:\Users\Administrator\Desktop\DOTNET\SimpleBackend\obj\Debug\net8.0\SimpleBackend.genruntimeconfig.cache
 C:\Users\Administrator\Desktop\DOTNET\SimpleBackend\obj\Debug\net8.0\ref\SimpleBackend.dll
+C:\Users\Administrator\Desktop\DOTNET\SimpleBackend\obj\Debug\net8.0\SimpleBackend.sourcelink.json
