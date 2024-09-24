@@ -10,6 +10,10 @@ public static class Helpers
     public static async Task<string> TestRDSConnection()
     {
         string connectionString = GetRDSConnectionString();
+        
+        // Debugging print to check the connection string
+        Console.WriteLine($"Attempting to connect with connection string: {connectionString}");
+
         using (var connection = new SqlConnection(connectionString))
         {
             try
@@ -20,6 +24,7 @@ public static class Helpers
             }
             catch (Exception ex)
             {
+                Console.WriteLine($"Connection failed: {ex.Message}");
                 return $"Connection failed: {ex.Message}";
             }
         }
@@ -28,16 +33,16 @@ public static class Helpers
     public static string GetRDSConnectionString()
     {
         Env.Load();
-        string username = Env.GetString("DB_USER");
-        string password = Env.GetString("DB_PASSWORD");
-        string hostname = Env.GetString("DB_HOST");
-        string port = Env.GetString("DB_PORT");
-        string database = Env.GetString("DB_NAME");
+        string username = Env.GetString("DB_USER") ?? throw new ArgumentNullException("DB_USER");
+        string password = Env.GetString("DB_PASSWORD") ?? throw new ArgumentNullException("DB_PASSWORD");
+        string hostname = Env.GetString("DB_HOST") ?? throw new ArgumentNullException("DB_HOST");
+        string port = Env.GetString("DB_PORT") ?? throw new ArgumentNullException("DB_PORT");
+        string database = Env.GetString("DB_NAME") ?? throw new ArgumentNullException("DB_NAME");
 
         return $"Data Source={hostname},{port};Initial Catalog={database};User ID={username};Password={password};TrustServerCertificate=True;";
     }
 
-    public static async Task<Dictionary<string, string>> GetSecret(string secretName, string region)
+    public static async Task<Dictionary<string, string>?> GetSecret(string secretName, string region)
     {
         IAmazonSecretsManager client = new AmazonSecretsManagerClient(RegionEndpoint.GetBySystemName(region));
 
@@ -54,7 +59,8 @@ public static class Helpers
         }
         catch (Exception e)
         {
-            throw e; // Handle exceptions appropriately in production
+            Console.WriteLine($"Error fetching secret: {e.Message}");
+            throw; // Preserve stack trace
         }
 
         string secret = response.SecretString;
@@ -64,6 +70,6 @@ public static class Helpers
         }
 
         // Parse the secret JSON string into a dictionary
-        return JsonSerializer.Deserialize<Dictionary<string, string>>(secret);
+        return JsonSerializer.Deserialize<Dictionary<string, string>>(secret)!; // Null-forgiving operator
     }
 }

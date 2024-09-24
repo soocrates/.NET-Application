@@ -13,15 +13,15 @@ var builder = WebApplication.CreateBuilder(args);
 Env.Load();
 
 // Retrieve environment variables for Secret Manager usage
-string secretName = Env.GetString("AWS_SECRET_NAME"); // Store the secret name in .env
-string region = Env.GetString("AWS_REGION"); // You can store the AWS region in the .env file or fetch dynamically
+string secretName = Env.GetString("AWS_SECRET_NAME")!;
+string region = Env.GetString("AWS_REGION")!;
 
 // Fetch RDS credentials from Secrets Manager
 var rdsCredentials = await Helpers.GetSecret(secretName, region);
 
 // Print the credentials to the console (for testing purposes)
 Console.WriteLine($"Fetched credentials from Secrets Manager:");
-Console.WriteLine($"Host: {rdsCredentials["bucket"]}");
+Console.WriteLine($"Host: {rdsCredentials!["bucket"]}");
 Console.WriteLine($"Port: {rdsCredentials["password"]}");
 Console.WriteLine($"Username: {rdsCredentials["organization"]}");
 Console.WriteLine($"Password: {rdsCredentials["username"]}");
