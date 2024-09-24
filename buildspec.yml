@@ -1,0 +1,16 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      dotnet: 6.0
+  build:
+    commands:
+      - dotnet restore
+      - dotnet build --configuration Release
+      - dotnet publish --configuration Release --output ./out
+
+artifacts:
+  files:
+    - '**/*'
+  base-directory: './out'
