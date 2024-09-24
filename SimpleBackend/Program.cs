@@ -6,23 +6,29 @@ using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 using SimpleBackend.Data;
 using DotNetEnv;
-using System.Data.SqlClient;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Load environment variables from .env file
 Env.Load();
 
-// Retrieve environment variables
-string hostname = Env.GetString("DB_HOST");
-string port = Env.GetString("DB_PORT");
-string database = Env.GetString("DB_NAME");
-string username = Env.GetString("DB_USER");
-string password = Env.GetString("DB_PASSWORD");
+// Retrieve environment variables for Secret Manager usage
+string secretName = Env.GetString("AWS_SECRET_NAME"); // Store the secret name in .env
+string region = Env.GetString("AWS_REGION"); // You can store the AWS region in the .env file or fetch dynamically
+
+// Fetch RDS credentials from Secrets Manager
+var rdsCredentials = await Helpers.GetSecret(secretName, region);
+
+// Print the credentials to the console (for testing purposes)
+Console.WriteLine($"Fetched credentials from Secrets Manager:");
+Console.WriteLine($"Host: {rdsCredentials["bucket"]}");
+Console.WriteLine($"Port: {rdsCredentials["password"]}");
+Console.WriteLine($"Username: {rdsCredentials["organization"]}");
+Console.WriteLine($"Password: {rdsCredentials["username"]}");
 
 // Configure DbContext to use SQL Server with the loaded environment variables
 builder.Services.AddDbContext<SimpleDbContext>(options =>
-    options.UseSqlServer($"Data Source={hostname},{port};Initial Catalog={database};User ID={username};Password={password};TrustServerCertificate=True;"));
+    options.UseSqlServer($"Data Source={rdsCredentials["host"]},{rdsCredentials["port"]};Initial Catalog={rdsCredentials["dbname"]};User ID={rdsCredentials["username"]};Password={rdsCredentials["password"]};TrustServerCertificate=True;"));
 
 // Add AWS X-Ray and CloudWatch logging services
 builder.Services.AddAWSService<IAmazonCloudWatchLogs>();
@@ -92,38 +98,3 @@ app.MapGet("/redirect", () => Results.Redirect("https://example.com"));
 app.MapGet("/connectdb", () => Helpers.TestRDSConnection());
 
 app.Run();
-
-public static class Helpers
-{
-    public static async Task<string> TestRDSConnection()
-    {
-        string connectionString = GetRDSConnectionString();
-        using (var connection = new SqlConnection(connectionString))
-        {
-            try
-            {
-                connection.Open();
-                // Keep the connection open for 2 minutes (120,000 milliseconds)
-                await Task.Delay(TimeSpan.FromMinutes(2));
-
-                return "Successfully connected to SQL Server on Amazon RDS.";
-            }
-            catch (Exception ex)
-            {
-                return $"Connection failed: {ex.Message}";
-            }
-        }
-    }
-
-    public static string GetRDSConnectionString()
-    {
-        Env.Load();
-        string username = Env.GetString("DB_USER");
-        string password = Env.GetString("DB_PASSWORD");
-        string hostname = Env.GetString("DB_HOST");
-        string port = Env.GetString("DB_PORT");
-        string database = Env.GetString("DB_NAME");
-
-        return $"Data Source={hostname},{port};Initial Catalog={database};User ID={username};Password={password};TrustServerCertificate=True;";
-    }
-}
