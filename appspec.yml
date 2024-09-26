@@ -1,28 +1,26 @@
 version: 0.0
 os: windows
-
 files:
-  # Specify the files and directories to copy from the S3 bucket to the target instance
-  - source: /output
-    destination: C:\inetpub\wwwroot\YourAppName
+  - source: /
+    destination: C:\inetpub\wwwroot  # This is where IIS hosts web applications in default configuration.
 
 hooks:
   BeforeInstall:
-    - location: scripts/BeforeInstall.ps1
+    - location: scripts/stop_iis.ps1
       timeout: 300
       runas: Administrator
 
   AfterInstall:
-    - location: scripts/AfterInstall.ps1
-      timeout: 300
+    - location: scripts/install_dependencies.ps1
+      timeout: 600
       runas: Administrator
 
   ApplicationStart:
-    - location: scripts/ApplicationStart.ps1
+    - location: scripts/start_iis.ps1
       timeout: 300
       runas: Administrator
 
   ValidateService:
-    - location: scripts/ValidateService.ps1
+    - location: scripts/validate_service.ps1
       timeout: 300
       runas: Administrator
