@@ -6,16 +6,10 @@ phases:
       dotnet: 5.0
     commands:
       - dotnet --version
-      # Download .NET installation script
       - Invoke-WebRequest -Uri https://dot.net/v1/dotnet-install.ps1 -OutFile dotnet-install.ps1
-      # Install .NET 8
       - powershell -ExecutionPolicy Bypass -File .\dotnet-install.ps1 -Channel 8.0 -InstallDir "C:\dotnet"
-      # Add .NET 8 to PATH and make it persist
       - $env:PATH = "C:\dotnet;$env:PATH"
-      - [Environment]::SetEnvironmentVariable("PATH", $env:PATH, "Machine")
-      # Refresh the session to ensure PATH changes take effect
-      - $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
-      # Verify installation
+      - $env:PATH = [Environment]::GetEnvironmentVariable("PATH", "Machine") + ";" + [Environment]::GetEnvironmentVariable("PATH", "User")
       - dotnet --version
 
   pre_build:
