@@ -9,8 +9,10 @@ phases:
     commands:
       - echo "Building the code..."
       - $commitHash = "$env:CODEBUILD_RESOLVED_SOURCE_VERSION"  # Get the commit hash
-      - Compress-Archive -Path * -DestinationPath "${commitHash}.zip"  # Zip the entire source code directory
+      - $sanitizedCommitHash = $commitHash -replace '[^a-zA-Z0-9]', '_'  # Sanitize the commit hash
+      - echo "Using commit hash: $sanitizedCommitHash"
+      - Compress-Archive -Path * -DestinationPath "${sanitizedCommitHash}.zip"  # Zip the entire source code directory
 artifacts:
   files:
-    - "${env:CODEBUILD_RESOLVED_SOURCE_VERSION}.zip"  # Specify the zip file named after the commit hash
+    - "${sanitizedCommitHash}.zip"  # Specify the zip file named after the sanitized commit hash
   discard-paths: yes  # Discard paths to store the zip directly in S3
