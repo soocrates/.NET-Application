@@ -4,11 +4,14 @@ phases:
   install:
     runtime-versions:
       python: 3.x  # Specify the version if you need it
+    commands:
+      - echo "Installing zip utility..."
+      - apt-get update && apt-get install -y zip  # Install zip utility
   build:
     commands:
       - echo "Building the code..."
       - zip -r code.zip .  # Zip the entire source code directory
 artifacts:
   files:
-    - code.zip  # Specify the zip file to be stored as artifact
+    - code.zip  # Specify the zip file to be stored as an artifact
   discard-paths: yes  # Discard paths to store the zip directly in S3
