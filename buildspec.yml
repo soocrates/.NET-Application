@@ -2,14 +2,14 @@ version: 0.2
 
 phases:
   install:
+    runtime-versions:
+      dotnet: 8.0
     commands:
-      - echo Installing .NET 8.0 SDK...
-      - powershell -Command "Invoke-WebRequest -Uri https://dot.net/v1/dotnet-install.ps1 -OutFile dotnet-install.ps1"
-      - powershell -ExecutionPolicy Bypass -File .\dotnet-install.ps1 -Version 8.0.100
-      - $dotnet_path = [System.IO.Path]::Combine($Env:USERPROFILE, ".dotnet")
-      - $Env:PATH += ";$dotnet_path"
-      - $dotnet_cmd = [System.IO.Path]::Combine($dotnet_path, "dotnet.exe")
-      - &$dotnet_cmd --version  # Check the installed SDK version to confirm it's using .NET 8.0
+      # Ensure all tools and dependencies are up-to-date
+      - echo Installing .NET Core SDK...
+      - pwsh -Command Install-PackageProvider -Name NuGet -Force
+      - echo Confirming .NET Core SDK version...
+      - dotnet --version
 
   pre_build:
     commands:
