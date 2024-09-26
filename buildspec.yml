@@ -2,20 +2,17 @@ version: 0.2
 
 phases:
   install:
+    runtime-versions:
+      dotnet: 6.0  # Start with a supported version
     commands:
-      - echo Installing .NET 8 SDK...
-      # Use PowerShell's Invoke-WebRequest to download the .NET 8 SDK directly
-      - powershell -Command "Invoke-WebRequest -Uri https://download.visualstudio.microsoft.com/download/pr/3dc34be6-404b-48b0-9436-e2f9f5fd1ba4/d547ea4bc0b11ad3bbba25b178bc3e95/dotnet-sdk-8.0.100-win-x64.zip -OutFile dotnet8.zip"
-      - echo Extracting .NET 8 SDK...
-      # Create a directory to extract and install .NET 8 SDK
-      - mkdir -p C:/dotnet8
-      - powershell -Command "Expand-Archive -Path dotnet8.zip -DestinationPath C:/dotnet8"
-      - echo Setting up PATH environment for .NET 8 SDK...
-      # Modify PATH using PowerShell syntax
-      - powershell -Command "$env:PATH='C:/dotnet8;' + $env:PATH"
-      - echo Confirming .NET 8 SDK version...
-      # Print the installed .NET version
-      - C:/dotnet8/dotnet --version
+      # Download .NET installation script
+      - Invoke-WebRequest -Uri https://dot.net/v1/dotnet-install.ps1 -OutFile dotnet-install.ps1
+      # Install .NET 8
+      - powershell -ExecutionPolicy Bypass -File dotnet-install.ps1 -Channel 8.0 -InstallDir C:\Program Files\dotnet
+      # Add .NET 8 to PATH
+      - $env:PATH = "C:\Program Files\dotnet;$env:PATH"
+      # Verify installation
+      - dotnet --version
   pre_build:
     commands:
       - echo Building the application...
