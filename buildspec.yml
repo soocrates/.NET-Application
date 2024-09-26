@@ -6,7 +6,7 @@ phases:
       - echo Installing .NET 8.0 SDK...
       - powershell -Command "Invoke-WebRequest -Uri https://dot.net/v1/dotnet-install.ps1 -OutFile dotnet-install.ps1"
       - powershell -ExecutionPolicy Bypass -File .\dotnet-install.ps1 -Version 8.0.100
-      - set PATH=%PATH%;%USERPROFILE%\.dotnet\
+      - $Env:PATH += ';' + [System.IO.Path]::Combine($Env:USERPROFILE, '.dotnet')  # Correct way to update PATH in PowerShell
       - dotnet --version  # Check the installed SDK version to confirm
 
   pre_build:
