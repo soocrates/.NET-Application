@@ -2,12 +2,12 @@ version: 0.2
 
 phases:
   install:
-    runtime-versions:
-      dotnet: 8.0
     commands:
-      - echo Installing dependencies...
-      - dotnet --version  # Check the installed SDK version
-      - dotnet restore
+      - echo Installing .NET 8.0 SDK...
+      - powershell -Command "Invoke-WebRequest -Uri https://dot.net/v1/dotnet-install.ps1 -OutFile dotnet-install.ps1"
+      - powershell -ExecutionPolicy Bypass -File .\dotnet-install.ps1 -Version 8.0.100
+      - set PATH=%PATH%;%USERPROFILE%\.dotnet\
+      - dotnet --version  # Check the installed SDK version to confirm
 
   pre_build:
     commands:
