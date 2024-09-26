@@ -1,15 +1,12 @@
 version: 0.2
 
-env:
-  variables:
-    DOTNET_ROOT: /usr/share/dotnet/sdk
-
 phases:
   install:
     runtime-versions:
       dotnet: 8.0
     commands:
       - echo Installing dependencies...
+      - dotnet --version  # Check the installed SDK version
       - dotnet restore
 
   pre_build:
