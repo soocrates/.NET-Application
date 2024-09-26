@@ -2,15 +2,13 @@ version: 0.2
 
 phases:
   install:
-    runtime-versions:
-      python: 3.x  # Specify the version if you need it
     commands:
       - echo "Installing zip utility..."
-      - apt-get update && apt-get install -y zip  # Install zip utility
+      - choco install zip -y  # Install zip utility using Chocolatey
   build:
     commands:
       - echo "Building the code..."
-      - zip -r code.zip .  # Zip the entire source code directory
+      - Compress-Archive -Path * -DestinationPath code.zip  # Zip the entire source code directory
 artifacts:
   files:
     - code.zip  # Specify the zip file to be stored as an artifact
