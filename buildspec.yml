@@ -2,8 +2,11 @@ version: 0.2
 
 phases:
   install:
+    runtime-versions:
+      dotnet: 6.0
     commands:
       - echo "Starting the build process..."
+      - dotnet --version
   
   pre_build:
     commands:
@@ -11,11 +14,11 @@ phases:
 
   build:
     commands:
-      - echo "Zipping the source code..."
-      # Create the output directory if it doesn't exist
-      - mkdir -p output
-      # Zip the source code, excluding the output directory
-      - powershell Compress-Archive -Path * -DestinationPath output/source-code.zip
+      - echo "Building the application..."
+      - dotnet build --configuration Release
+      - echo "Zipping the build output..."
+      - mkdir -p $CODEBUILD_SRC_DIR/output
+      - powershell Compress-Archive -Path $CODEBUILD_SRC_DIR/bin/Release/* -DestinationPath $CODEBUILD_SRC_DIR/output/build-output.zip
 
   post_build:
     commands:
@@ -23,6 +26,7 @@ phases:
 
 artifacts:
   files:
-    - '**/*'  # Include all files in the output directory
+    - '**/*'
   base-directory: output
+  name: build-output-$(date +%Y-%m-%d-%H-%M-%S).zip
   discard-paths: no
