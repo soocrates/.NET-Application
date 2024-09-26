@@ -5,9 +5,6 @@ phases:
     runtime-versions:
       dotnet: 8.0
     commands:
-      # Ensure all tools and dependencies are up-to-date
-      - echo Installing .NET Core SDK...
-      - pwsh -Command Install-PackageProvider -Name NuGet -Force
       - echo Confirming .NET Core SDK version...
       - dotnet --version
 
