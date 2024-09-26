@@ -4,8 +4,8 @@ phases:
   install:
     commands:
       - echo Installing .NET 8 SDK...
-      # Download the .NET 8 SDK (change URL if needed for a different version)
-      - curl -L https://dotnet.microsoft.com/download/dotnet/thank-you/sdk-8.0.100-windows-x64-binaries -o dotnet8.zip
+      # Use PowerShell's Invoke-WebRequest to download the .NET 8 SDK
+      - powershell -Command "Invoke-WebRequest -Uri https://dotnet.microsoft.com/download/dotnet/thank-you/sdk-8.0.100-windows-x64-binaries -OutFile dotnet8.zip"
       - echo Extracting .NET 8 SDK...
       # Create a directory to extract and install .NET 8 SDK
       - mkdir -p /dotnet8
@@ -15,7 +15,7 @@ phases:
       - export PATH="/dotnet8:$PATH"
       - echo Confirming .NET 8 SDK version...
       # Print the installed .NET version
-      - dotnet --version
+      - /dotnet8/dotnet --version
 
   pre_build:
     commands:
