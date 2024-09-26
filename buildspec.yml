@@ -8,8 +8,9 @@ phases:
   build:
     commands:
       - echo "Building the code..."
-      - Compress-Archive -Path * -DestinationPath code.zip  # Zip the entire source code directory
+      - $commitHash = "$env:CODEBUILD_RESOLVED_SOURCE_VERSION"  # Get the commit hash
+      - Compress-Archive -Path * -DestinationPath "${commitHash}.zip"  # Zip the entire source code directory
 artifacts:
   files:
-    - code.zip  # Specify the zip file to be stored as an artifact
+    - "${env:CODEBUILD_RESOLVED_SOURCE_VERSION}.zip"  # Specify the zip file named after the commit hash
   discard-paths: yes  # Discard paths to store the zip directly in S3
