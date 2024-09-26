@@ -5,17 +5,17 @@ phases:
     commands:
       - echo "Starting the build process..."
       - echo "Simulating installation process..."
-      - sleep 120  # Simulate installation time
+      - sleep 5  # Simulate installation time
 
   pre_build:
     commands:
       - echo "Simulating pre-build process..."
-      - sleep 60  # Simulate pre-build time
+      - sleep 5  # Simulate pre-build time
 
   build:
     commands:
       - echo "Simulating build process..."
-      - sleep 120  # Simulate build time
+      - sleep 5  # Simulate build time
 
   post_build:
     commands:
