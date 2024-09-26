@@ -5,28 +5,29 @@ phases:
     commands:
       - echo "Starting the build process..."
       - echo "Simulating installation process..."
-      - sleep 5  # Simulate installation time
+      - sleep 1  # Simulate installation time
 
   pre_build:
     commands:
       - echo "Simulating pre-build process..."
-      - sleep 5  # Simulate pre-build time
+      - sleep 1  # Simulate pre-build time
 
   build:
     commands:
       - echo "Simulating build process..."
-      - sleep 5  # Simulate build time
+      - sleep 1  # Simulate build time
 
   post_build:
     commands:
       - echo "Zipping the source code..."
-      # Zip the source code (all files in the current directory) into the output directory
+      # Create the output directory if it doesn't exist
       - mkdir -p output
-      - powershell Compress-Archive -Path * -DestinationPath output/source-code.zip
+      # Zip the source code, but exclude the output directory itself to avoid conflicts
+      - powershell Compress-Archive -Path * -DestinationPath output/source-code.zip -Exclude output/*
 
 artifacts:
   files:
-    - output/**/*  # Include all files in the output directory
+    - '**/*'  # Include all files in the output directory
 
   base-directory: output  # Base directory for artifacts
   discard-paths: no       # Keep the directory structure
