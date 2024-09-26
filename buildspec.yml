@@ -1,32 +1,36 @@
 version: 0.2
 
+env:
+  variables:
+    S3_BUCKET: "fujitech-codepipeline-artifacts-bucket-8586"
+    S3_PREFIX: "codebuild/artifacts"
+
 phases:
   install:
     runtime-versions:
       dotnet: 6.0
     commands:
-      - echo "Starting the build process..."
-      - dotnet --version
+      - echo "Starting the process..."
+      - aws --version
   
   pre_build:
     commands:
-      - echo "Fetching source code..."
+      - echo "Preparing to zip source code..."
 
   build:
     commands:
-      - echo "Building the application..."
-      - dotnet build --configuration Release
-      - echo "Zipping the build output..."
+      - echo "Zipping the source code..."
       - mkdir -p $CODEBUILD_SRC_DIR/output
-      - powershell Compress-Archive -Path $CODEBUILD_SRC_DIR/bin/Release/* -DestinationPath $CODEBUILD_SRC_DIR/output/build-output.zip
+      - powershell Compress-Archive -Path * -Exclude output -DestinationPath $CODEBUILD_SRC_DIR/output/source-code.zip
 
   post_build:
     commands:
-      - echo "Build process complete. Ready to upload artifacts."
+      - echo "Zipping complete. Uploading to S3..."
+      - aws s3 cp $CODEBUILD_SRC_DIR/output/source-code.zip s3://$S3_BUCKET/$S3_PREFIX/source-code-$(date +%Y-%m-%d-%H-%M-%S).zip
 
 artifacts:
   files:
     - '**/*'
   base-directory: output
-  name: build-output-$(date +%Y-%m-%d-%H-%M-%S).zip
+  name: source-code-$(date +%Y-%m-%d-%H-%M-%S).zip
   discard-paths: no
