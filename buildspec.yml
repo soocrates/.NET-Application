@@ -5,14 +5,16 @@ phases:
     runtime-versions:
       dotnet: 6.0  # Start with a supported version
     commands:
+      - dotnet --version
       # Download .NET installation script
       - Invoke-WebRequest -Uri https://dot.net/v1/dotnet-install.ps1 -OutFile dotnet-install.ps1
       # Install .NET 8
-      - powershell -ExecutionPolicy Bypass -File dotnet-install.ps1 -Channel 8.0 -InstallDir C:\Program Files\dotnet
+      - powershell -ExecutionPolicy Bypass -File .\dotnet-install.ps1 -Channel 8.0 -InstallDir "C:\dotnet"
       # Add .NET 8 to PATH
-      - $env:PATH = "C:\Program Files\dotnet;$env:PATH"
+      - $env:PATH = "C:\dotnet;$env:PATH"
       # Verify installation
       - dotnet --version
+
   pre_build:
     commands:
       - echo Building the application...
