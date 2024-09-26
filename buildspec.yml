@@ -23,11 +23,6 @@ phases:
 
 artifacts:
   files:
-    - 'source-code.zip'  # Upload only the zip file
-
-  base-directory: output  # Directory where the zip is created
-  discard-paths: no       # Retain the directory structure
-
-  # Artifact storage location within S3
-  # Note: Remove this section if the bucket is managed by the pipeline (optional to add)
-  destination: fujitech-codepipeline-artifacts-bucket-8586/codebuild/artifacts
+    - '**/*'  # Include all files in the output directory
+  base-directory: output
+  discard-paths: no
