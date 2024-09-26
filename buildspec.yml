@@ -2,10 +2,19 @@ version: 0.2
 
 phases:
   install:
-    runtime-versions:
-      dotnet: 8.0
     commands:
-      - echo Confirming .NET Core SDK version...
+      - echo Installing .NET 8 SDK...
+      # Download the .NET 8 SDK (change URL if needed for a different version)
+      - curl -L https://dotnet.microsoft.com/download/dotnet/thank-you/sdk-8.0.100-windows-x64-binaries -o dotnet8.zip
+      - echo Extracting .NET 8 SDK...
+      # Create a directory to extract and install .NET 8 SDK
+      - mkdir -p /dotnet8
+      - powershell -Command "Expand-Archive -Path dotnet8.zip -DestinationPath /dotnet8"
+      - echo Setting up PATH environment for .NET 8 SDK...
+      # Add the .NET 8 SDK path to the environment PATH
+      - export PATH="/dotnet8:$PATH"
+      - echo Confirming .NET 8 SDK version...
+      # Print the installed .NET version
       - dotnet --version
 
   pre_build:
