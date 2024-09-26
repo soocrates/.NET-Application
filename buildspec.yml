@@ -5,12 +5,18 @@ phases:
     runtime-versions:
       dotnet: 5.0
     commands:
+      - echo Current .NET version
       - dotnet --version
+      - echo Downloading .NET 8.0 installer
       - Invoke-WebRequest -Uri https://dot.net/v1/dotnet-install.ps1 -OutFile dotnet-install.ps1
-      - powershell -ExecutionPolicy Bypass -File .\dotnet-install.ps1 -Channel 8.0 -InstallDir "C:\dotnet"
-      - $env:PATH = "C:\dotnet;$env:PATH"
-      - $env:PATH = [Environment]::GetEnvironmentVariable("PATH", "Machine") + ";" + [Environment]::GetEnvironmentVariable("PATH", "User")
+      - echo Installing .NET 8.0
+      - powershell -ExecutionPolicy Bypass -File .\dotnet-install.ps1 -Channel 8.0 -InstallDir "C:\dotnet8"
+      - echo Adding .NET 8.0 to PATH
+      - $env:PATH = "C:\dotnet8;$env:PATH"
+      - echo Verifying .NET 8.0 installation
       - dotnet --version
+      - echo Listing installed .NET SDKs
+      - dotnet --list-sdks
 
   pre_build:
     commands:
