@@ -4,34 +4,30 @@ phases:
   install:
     commands:
       - echo "Starting the build process..."
-      - echo "Simulating installation process..."
-      - sleep 1  # Simulate installation time
-
+  
   pre_build:
     commands:
-      - echo "Simulating pre-build process..."
-      - sleep 1  # Simulate pre-build time
+      - echo "Fetching source code..."
 
   build:
-    commands:
-      - echo "Simulating build process..."
-      - sleep 1  # Simulate build time
-
-  post_build:
     commands:
       - echo "Zipping the source code..."
       # Create the output directory if it doesn't exist
       - mkdir -p output
-      # Zip the source code, but exclude the output directory itself to avoid conflicts
-      - powershell Compress-Archive -Path * -DestinationPath output/source-code.zip -Exclude output/*
+      # Zip the source code, excluding the output directory
+      - powershell Compress-Archive -Path * -DestinationPath output/source-code.zip
+
+  post_build:
+    commands:
+      - echo "Build process complete. Ready to upload artifacts."
 
 artifacts:
   files:
-    - '**/*'  # Include all files in the output directory
+    - 'source-code.zip'  # Upload only the zip file
 
-  base-directory: output  # Base directory for artifacts
-  discard-paths: no       # Keep the directory structure
+  base-directory: output  # Directory where the zip is created
+  discard-paths: no       # Retain the directory structure
 
-  destination:
-    bucket: fujitech-codepipeline-artifacts-bucket-8586  # Replace with your S3 bucket name
-    path: codebuild/artifacts         # Customize the path within the S3 bucket
+  # Artifact storage location within S3
+  # Note: Remove this section if the bucket is managed by the pipeline (optional to add)
+  destination: fujitech-codepipeline-artifacts-bucket-8586/codebuild/artifacts
