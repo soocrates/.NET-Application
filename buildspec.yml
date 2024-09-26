@@ -2,28 +2,14 @@ version: 0.2
 
 phases:
   install:
-    runtime-versions:
-      dotnet: 6.0
     commands:
-      - echo "Starting the build process..."
-
-  pre_build:
-    commands:
-      - echo "Preparing to zip source code..."
-      - $env:GIT_COMMIT_HASH = $(git rev-parse --short HEAD)
-      - echo "Commit hash: $env:GIT_COMMIT_HASH"
-
+      - echo "Installing zip utility..."
+      - choco install zip -y  # Install zip utility using Chocolatey
   build:
     commands:
-      - echo "Zipping the source code..."
-      - Compress-Archive -Path * -DestinationPath "$env:GIT_COMMIT_HASH.zip" -Force
-
-  post_build:
-    commands:
-      - echo "Build complete. Artifact ready for storage."
-
+      - echo "Building the code..."
+      - Compress-Archive -Path * -DestinationPath code.zip  # Zip the entire source code directory
 artifacts:
   files:
-    - $env:GIT_COMMIT_HASH.zip
-  name: $env:GIT_COMMIT_HASH.zip
-  discard-paths: yes
+    - code.zip  # Specify the zip file to be stored as an artifact
+  discard-paths: yes  # Discard paths to store the zip directly in S3
